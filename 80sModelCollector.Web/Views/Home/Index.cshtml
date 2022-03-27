@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<_80sModelCollector.Data.Stock>
+
+<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5 bg-light">
+            @foreach (var item in @Model)
+            {
+                <table width="600" height="380" class="centre">
+                    <tr>
+                        <td style="text-align:left;"><b>@item.Name</b></td>
+                        <td style="text-align:right;">Stock Remaining: @item.RemainingStock</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;"><img src=/stock/@item.Picture width="360" height="266" /></td>
+                        <td style="text-align:right;">@item.Description</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;"><b>£@item.Price</b></td>
+                        <td style="text-align:right;"><button type="button" class="btn btn-primary" id="@item.SerialNumber" style="background-color: deeppink" onclick="location.href='@Url.Action("BasketButtonClick", "Home", new { serialNumber = @item.SerialNumber})'">Add To Basket</button></td>
+                    </tr>
+                </table>
+                <br/>
+                <hr>
+            }
+        </div>
+    </div>
+</div>
+

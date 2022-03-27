@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Basket";
+}
+
+@model CheckOutModel
+
+<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5 bg-light">
+            <div class="centre">
+                <h3>Items in your basket</h3>
+                <table class="centre" width="60%" style="border: 1px solid black; border-collapse: collapse;">
+                    @foreach (var item in @Model.GetWholeBasket())
+                    {
+                        <tr>
+                            <td style="text-align: left;">@item.Name</td>
+                            <td style="text-align: left;">@item.Orders</td>
+                            <td style="text-align: right;"></td>
+                            <td style="text-align: right;">£</td>
+                            <td style="text-align: left;">@item.Price</td>
+                            <td style="text-align: right;"><button type="button" class="btn btn-primary" id="Remove" + @item.SerialNumber style="background-color: deeppink" onclick="location.href='@Url.Action("RemoveItemButtonClick", "Basket", new {itemToDelete = @item.SerialNumber})'">Remove</button></td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;">Subtotal</td>
+                        <td style="text-align: left;">£ @String.Format("{0:0.00}", Model.GetSubTotal())</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;">Final Price</td>
+                        <td style="text-align: left;">£ @String.Format("{0:0.00}", Model.GetDiscountedPrice())</td>
+                    </tr>
+                </table>
+                <label for="voucher"><b>Do you Have A Voucher Code?</b></label>
+                <input type="text" placeholder="Enter Code" id="voucher">
+                <button type="button" class="btn btn-primary" id="discount" style="background-color: deeppink" onclick="CheckDiscount()">Apply</button>
+                <br />
+                <br />
+                <button type="button" class="btn btn-primary" id="purchase" style="background-color: deeppink">Buy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CheckDiscount() {
+        var txtVal = $('#voucher').val();
+        if (txtVal.length > 0) {
+            var url = '@Url.Action("DiscountButtonClick", "Basket")';
+
+            //This is pretty hacky and i'm sure there is a better way to clear the Url
+            var pos = url.search("DiscountButtonClick");
+            url = url.substr(0, pos + 19);
+            window.location.href = url + '/' + txtVal;
+        }
+    }
+</script>
