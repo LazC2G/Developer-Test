@@ -7,21 +7,41 @@ The provided app is intneionally incomplete and one could see it as an agile Inc
 ## Enhancements
 
 Within the scope of what I have compeleted were these additional things I considered:
+
 Add support for multiple browser tabs (session id)
+
 Fix discount code preservation once applied
+
 Manage decrement of remaining stock numbers in the database
+
 Accounts for users
+
 Putting orders against users in database, providing an order history for each user
+
 improve the css (what i've done is minimally acceptable, and i could play for days with it)
+
 Log audit trail of actions in app to provide transaction history
+
 
 
 ## Things I have intentionally left out
 
 User accounts and login
+
 Mobile phone targeting 
+
 Website caching
+
 All browser support (chrome only)
+
 Cookie management
+
 Security certificates
+
 Favicon
+
+
+## Discount Code
+enter the following for 15% off
+
+288-15
